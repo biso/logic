@@ -17,6 +17,8 @@ trait IntSignal extends Signal[Int] {
   def ===(other: Signal[Int]) = for (x <- this; y <- other) yield x == y
 
   def >>(other: Signal[Int]) = for (x <- this; y <- other) yield x >> y
+  def >>(other : Int) = for (x <- this) yield x >> other
+      
   def >>>(other: Signal[Int]) = for (x <- this; y <- other) yield x >>> y
   def <<(other: Signal[Int]) = for (x <- this; y <- other) yield x << y
 
