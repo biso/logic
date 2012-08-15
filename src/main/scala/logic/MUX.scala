@@ -1,6 +1,6 @@
 package logic
 
-case class MUX[Ctl,Val] (
+case class MUX[+Ctl,+Val] (
 	val ctl : Signal[Ctl],
 	val pairs : (Ctl, Signal[Val])*) extends Signal[Val] {
 
