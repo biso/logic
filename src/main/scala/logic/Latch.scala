@@ -1,6 +1,6 @@
 package logic
 
-class Latch[+T](val init : T = new Default[T].it, val din : Signal[T]) extends Signal[T] {
+class Latch[+T](val init : T = new Default[T](), val din : Signal[T]) extends Signal[T] {
   
   private[this] var lastTs : Int = -1
   private[this] var lastVal : T = _

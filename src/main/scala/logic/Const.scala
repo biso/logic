@@ -1,6 +1,6 @@
 package logic
 
-class Const[T](val v : T) extends Signal[T] {
+class Const[+T](val v : T) extends Signal[T] {
   def apply(ts : Int) = v
 }
 

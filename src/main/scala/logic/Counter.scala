@@ -6,9 +6,9 @@ class Counter(
     val init: Int = 0,
     val step: Int = 1) extends Wire[Int] {
 
-  this := init :: MUX(load,
+  (init :: MUX(load,
     (true -> Const(init)),
-    (false -> (this + Const(step))))
+    (false -> (this + Const(step))))) |> this
 
 }
 

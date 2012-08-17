@@ -6,7 +6,7 @@ class Mem[T : Manifest] (val size : Int,
     val wdata : Signal[T],
     val raddr : Signal[Int]) {
   
-  val data = Array.fill[T](size) { new Default[T].it }
+  val data = Array.fill[T](size) { new Default[T].get() }
   
   val rd = new Signal[T] {
     def apply(ts : Int) : T = {

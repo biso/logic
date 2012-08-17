@@ -1,8 +1,8 @@
 package logic
 
-class Wire[T] extends Signal[T] {
+class Wire[+T] extends Signal[T] {
   
-  private[this] var input : Signal[T] = null
+  private[this] var input : Signal[Any] = null
 
   private[this] var lastTs: Int = -1
   private[this] var lastVal: T = _
@@ -10,12 +10,13 @@ class Wire[T] extends Signal[T] {
   def apply(ts: Int) : T = {
     if (ts != lastTs) {
       lastTs = ts
-      lastVal = input(ts)
+      lastVal = input(ts).asInstanceOf[T]
     }
     lastVal
   }
   
-  def :=(src : Signal[T]) {
+  override def <|[U >: T](src : Signal[U]) {
+    if (input.eq(src)) return;
     if (input != null) throw new Exception("already connected")
     input = src
   }
@@ -25,7 +26,7 @@ object Wire {
   def apply[T] = new Wire[T]
   def apply[T](x : Signal[T]) = {
     val w = new Wire[T]
-    w := x
+    x |> w
     w
   }
 }

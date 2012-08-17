@@ -15,4 +15,12 @@ trait Signal[+T] extends (Int => T) { parent =>
 	def zip[U](other : Signal[U]) = Pair(this,other)
 
 	def ::[U >: T](x : U) = latch(x)
+	
+	def <|[U >: T](other : Signal[U]) {
+	  throw new Exception("can't be driven")
+	}
+	
+	def |>[U >: T](other : Signal[U]) {
+	  other <| this
+	}
 }

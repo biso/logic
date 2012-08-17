@@ -1,7 +1,9 @@
 package logic
 
-class Default[T] {
+class Default[+T] {
   
-  var it : T = _
+  private[this] var it : T = _
+  
+  def get() = it
 
 }
